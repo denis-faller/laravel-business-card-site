@@ -68,7 +68,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => BusinessCardSite\User::class,
+            'model' => BusinessCardSite\Model\User::class,
         ],
 
         // 'users' => [

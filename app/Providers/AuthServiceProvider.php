@@ -4,6 +4,8 @@ namespace BusinessCardSite\Providers;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
+use BusinessCardSite\Model\StaticPage;
+use BusinessCardSite\Policies\StaticPagePolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -13,7 +15,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        // 'BusinessCardSite\Model' => 'BusinessCardSite\Policies\ModelPolicy',
+        StaticPage::class => StaticPagePolicy::class,
     ];
 
     /**

@@ -3,6 +3,7 @@
 namespace BusinessCardSite\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use BusinessCardSite\Model\Site;
 use BusinessCardSite\Model\StaticPage;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,13 +20,14 @@ class AppServiceProvider extends ServiceProvider
 
     /**
      * Bootstrap any application services.
-     * Задает переменную $menu для всех представлений сайта
+     * Задает переменную site и menu и name для всех представлений сайта
      * @return void
      */
     public function boot()
     {
-       $pages = StaticPage::all();
+        $site = Site::find(Site::MAIN_SITE_ID);
+        $pages = StaticPage::all();
        
-        view()->share('menu', $pages);
+        view()->share(['site' => $site, 'menu' => $pages]);
     }
 }

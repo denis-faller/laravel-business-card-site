@@ -30,11 +30,12 @@ class ConfirmPasswordController extends Controller
 
     /**
      * Create a new controller instance.
-     *
+     * Установить title и description для страницы
      * @return void
      */
     public function __construct()
     {
         $this->middleware('auth');
+        view()->share(['title' => 'Сброс пароля', 'description' => 'Сброс пароля к сайту']);
     }
 }

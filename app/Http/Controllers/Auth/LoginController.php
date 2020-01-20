@@ -30,11 +30,12 @@ class LoginController extends Controller
 
     /**
      * Create a new controller instance.
-     *
+     * Установить title и description для страницы
      * @return void
      */
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+        view()->share(['title' => 'Авторизация', 'description' => 'Войти на сайт']);
     }
 }

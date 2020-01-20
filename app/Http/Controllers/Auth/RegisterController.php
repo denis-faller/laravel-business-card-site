@@ -4,7 +4,7 @@ namespace BusinessCardSite\Http\Controllers\Auth;
 
 use BusinessCardSite\Http\Controllers\Controller;
 use BusinessCardSite\Providers\RouteServiceProvider;
-use BusinessCardSite\User;
+use BusinessCardSite\Model\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -33,12 +33,13 @@ class RegisterController extends Controller
 
     /**
      * Create a new controller instance.
-     *
+     * Установить title и description для страницы
      * @return void
      */
     public function __construct()
     {
         $this->middleware('guest');
+        view()->share(['title' => 'Регистрация', 'description' => 'Регистрация на сайте']);
     }
 
     /**

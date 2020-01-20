@@ -27,4 +27,14 @@ class ResetPasswordController extends Controller
      * @var string
      */
     protected $redirectTo = RouteServiceProvider::HOME;
+
+    /**
+    * Create a new controller instance.
+    * Установить title и description для страницы
+    * @return void
+    */
+    public function __construct()
+    {
+        view()->share(['title' => 'Сброс пароля', 'description' => 'Сброс пароля к сайту']);
+    }
 }
