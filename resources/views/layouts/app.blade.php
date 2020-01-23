@@ -28,7 +28,7 @@
 			<!-- Right Side Of Navbar -->
                         <ul class="navbar-nav ml-auto">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/admin">Админка</a>
+                                    <a class="nav-link" href="{{route('admin.StaticPage.index')}}">Админка</a>
                                 </li>
 				<!-- Authentication Links -->
 				@guest

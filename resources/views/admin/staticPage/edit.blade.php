@@ -1,9 +1,10 @@
-@extends('layouts.appAdmin')
+@extends('layouts.admin.index')
 
 @section('content')
     @include('common.errors')
-    <form action = "{{$url}}" method = "POST">
+    <form action = "{{route('admin.StaticPage.update', $page->id)}}" method = "POST">
         {{ csrf_field() }}
+        {{ method_field('PATCH') }}
         <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1">Название страницы</span>

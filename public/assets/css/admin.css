@@ -1,9 +1,9 @@
-.nav-admin-menu{
-	margin-top:10px;
-}
-.grid-row, .create-static-page{
+.nav-admin-menu,.grid-row, .create-static-page, form{
 	margin-top:10px;
 }
 .grid-col{
 	border: 1px solid black;
+}
+#dialog-delete-confirm{
+	display:none;
 }

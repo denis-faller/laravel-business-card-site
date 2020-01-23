@@ -9,6 +9,10 @@ use BusinessCardSite\Model\Role;
 
 class User extends Authenticatable
 {
+    // ID админа
+    const ID_ADMIN = 1;
+    
+    
     use Notifiable;
 
     /**

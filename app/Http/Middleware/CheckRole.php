@@ -6,10 +6,12 @@ use Closure;
 use BusinessCardSite\Model\Role;
 use Illuminate\Support\Facades\Auth;
 
+/** 
+ * Посредник для проверки роли пользователя
+ */
 class CheckRole
 {
     /**
-     * Handle an incoming request.
      * Проверяет пользователя на роль админа
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
@@ -22,6 +24,6 @@ class CheckRole
         if(Role::isAdmin($userID)){
             return $next($request);
         }
-        return redirect('/login');
+        return redirect(route('login'));
     }
 }

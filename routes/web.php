@@ -11,20 +11,33 @@
 |
 */
 
-Route::get('/', 'StaticPageController@index');
-
 Auth::routes();
 
-Route::prefix('/admin')->middleware(['auth', 'isAdmin'])->group(function() {
-    Route::get('/', 'AdminPageController@index')->name('adminIndex');
-
-    Route::get('/static-page/create/show/', 'Admin\StaticPageController@create')->name('adminStaticPageCreate');
-
-    Route::post('/static-page/create/', 'StaticPageController@create');
-    
-    Route::get('/static-page/edit/show/{id}', 'Admin\StaticPageController@edit')->name('adminStaticPageEdit');
-
-    Route::post('/static-page/edit/{page}', 'StaticPageController@edit');
-});
-
 Route::get('/{url}', 'StaticPageController@show');
+Route::resource('/', 'StaticPageController', ['only' => [
+    'index'
+]]);
+
+Route::prefix('/admin')->middleware(['auth', 'isAdmin'])->group(function() {
+    
+    Route::get('/pages/{page}/edit', 'Admin\StaticPageController@edit')->name('admin.StaticPage.edit');
+    Route::patch('/pages/{page}', 'Admin\StaticPageController@update')->name('admin.StaticPage.update');
+    Route::delete('/pages/{page}', 'Admin\StaticPageController@destroy');
+    Route::resource('/pages/', 'Admin\StaticPageController', ['only' => [
+        'index', 'create', 'store'
+    ],
+    'names' => [
+        'index' => 'admin.StaticPage.index', 
+        'create' => 'admin.StaticPage.create', 
+        'store' => 'admin.StaticPage.store'
+    ]]);
+
+    Route::get('/sites/{site}/edit/', 'Admin\SiteController@edit')->name('admin.Site.edit');
+    Route::patch('/sites/{site}', 'Admin\SiteController@update')->name('admin.Site.update');
+    Route::resource('/sites/', 'Admin\SiteController', ['only' => [
+        'index'
+    ],
+    'names' => [
+        'index' => 'admin.Site.index' 
+    ]]);
+});

@@ -1,8 +1,8 @@
-@extends('layouts.appAdmin')
+@extends('layouts.admin.index')
 
 @section('content')
     @include('common.errors')
-    <form action = "{{$url}}" method = "POST">
+    <form action = "{{route('admin.StaticPage.store')}}" method = "POST">
         {{ csrf_field() }}
         <div class="input-group mb-3">
             <div class="input-group-prepend">
