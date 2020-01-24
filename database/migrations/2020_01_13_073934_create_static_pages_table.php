@@ -30,6 +30,9 @@ class CreateStaticPagesTable extends Migration
         DB::table('static_pages')->insert(
             ['site_id' => 1, 'name' => 'Главная', 'description' => 'Описание компании', 'url' => '', 'html' => '<p>Главная страница</p>', 'created_at' => $date, 'updated_at' => $date]
         );
+        DB::table('static_pages')->insert(
+            ['site_id' => 1, 'name' => 'О компании', 'description' => 'Информация о компании', 'url' => 'about', 'html' => '<p>Информация о компании</p>', 'created_at' => $date, 'updated_at' => $date]
+        );
     }
 
     /**

@@ -2,12 +2,8 @@
 
 namespace BusinessCardSite\Http\Controllers;
 
-use BusinessCardSite\Model\StaticPage;
-use BusinessCardSite\Model\Site;
-use BusinessCardSite\Http\Requests\StaticPageRequest;
-use BusinessCardSite\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use BusinessCardSite\Services\StaticPageService;
+use BusinessCardSite\Models\StaticPage;
 
 /** 
  * Контроллер для вывода контента страницы
@@ -20,9 +16,9 @@ class StaticPageController extends Controller
     * Возвращает представление главной страницы
     * @return Illuminate\Support\Facades\View
     */  
-    public function index()
+    public function index(StaticPageService $service)
     {        
-        $mainPage = StaticPage::find(StaticPage::MAIN_PAGE_ID);
+        $mainPage = $service->find(StaticPage::MAIN_PAGE_ID);
         return view('index', ['content' => $mainPage]);
     }
 
@@ -32,9 +28,9 @@ class StaticPageController extends Controller
     * @return Illuminate\Support\Facades\View
     */  
     
-    public function show($url)
+    public function show($url, StaticPageService $service)
     {        
-        $page = StaticPage::where('url', $url)->first();
+        $page = $service->findByUrl($url);
         
         if(isset($page)){       
             return view('index', ['content' => $page]);

@@ -1,11 +1,11 @@
 <?php
 
-namespace BusinessCardSite\Model;
+namespace BusinessCardSite\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use BusinessCardSite\Model\Role;
+use BusinessCardSite\Models\Role;
 
 class User extends Authenticatable
 {

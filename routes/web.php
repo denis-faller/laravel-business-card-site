@@ -22,7 +22,7 @@ Route::prefix('/admin')->middleware(['auth', 'isAdmin'])->group(function() {
     
     Route::get('/pages/{page}/edit', 'Admin\StaticPageController@edit')->name('admin.StaticPage.edit');
     Route::patch('/pages/{page}', 'Admin\StaticPageController@update')->name('admin.StaticPage.update');
-    Route::delete('/pages/{page}', 'Admin\StaticPageController@destroy');
+    Route::delete('/pages/{page}', 'Admin\StaticPageController@destroy')->name('admin.StaticPage.destroy');
     Route::resource('/pages/', 'Admin\StaticPageController', ['only' => [
         'index', 'create', 'store'
     ],

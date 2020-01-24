@@ -19,7 +19,7 @@ class SiteTest extends TestCase
         $user = User::find(User::ID_ADMIN);
 
         $response = $this->actingAs($user)
-                        ->get('/admin/site');
+                        ->get(route('admin.Site.index'));
         
         $response->assertStatus(200);
         
@@ -39,13 +39,13 @@ class SiteTest extends TestCase
         $user = User::find(User::ID_ADMIN);
 
         $response = $this->actingAs($user)
-                        ->get('/admin/site');
+                        ->get(route('admin.Site.index'));
         
-        $response = $this->patch("/admin/site/edit/$id", [
+        $response = $this->patch(route("admin.StaticPage.update", $id), [
             'name' => $site->name
         ]);
         
-        $response->assertLocation('/admin/site');
+        $response->assertLocation(route('admin.Site.index'));
         
         $this->assertDatabaseHas('sites', ['id' => $id]);
     }

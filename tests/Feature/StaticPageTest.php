@@ -22,7 +22,7 @@ class StaticPageTest extends TestCase
         $user = User::find(User::ID_ADMIN);
 
         $response = $this->actingAs($user)
-                        ->get('/admin');
+                        ->get(route("admin.StaticPage.index"));
         
         $response->assertStatus(200);
         
@@ -38,17 +38,17 @@ class StaticPageTest extends TestCase
         $user = User::find(User::ID_ADMIN);
 
         $response = $this->actingAs($user)
-                         ->get('/admin/static-page/create/show/');
+                         ->get(route('admin.StaticPage.create'));
         
         $url = $this->faker->word();
-        $response = $this->post('/admin/static-page/create/', [
+        $response = $this->post(route('admin.StaticPage.store'), [
             'name' => $this->faker->company(),
             'description' => $this->faker->company(),
             'url' => $url,
             'html' => $this->faker->company(),
         ]);
         
-        $response->assertLocation('/admin');
+        $response->assertLocation(route("admin.StaticPage.index"));
         
         $this->assertDatabaseHas('static_pages', ['url' => $url]);
 
@@ -68,16 +68,16 @@ class StaticPageTest extends TestCase
         $user = User::find(User::ID_ADMIN);
 
         $response = $this->actingAs($user)
-                         ->get("/admin/static-page/edit/show/$id");
+                         ->get(route("admin.StaticPage.edit", $id));
         
-        $response = $this->post("/admin/static-page/edit/$id", [
+        $response = $this->patch(route("admin.StaticPage.update", $id), [
             'name' => $this->faker->company(),
             'description' => $this->faker->company(),
             'url' => $this->faker->word(),
             'html' => $this->faker->company(),
         ]);
         
-        $response->assertLocation('/admin');
+        $response->assertLocation(route("admin.StaticPage.index"));
         
         $this->assertDatabaseHas('static_pages', ['id' => $id]);
         
@@ -97,9 +97,9 @@ class StaticPageTest extends TestCase
         $user = User::find(User::ID_ADMIN);
 
         $response = $this->actingAs($user)
-                         ->get("/admin");
+                         ->get(route("admin.StaticPage.index"));
         
-        $response = $this->delete("/admin/static-page/delete/$id");
+        $response = $this->delete(route("admin.StaticPage.destroy", $id));
         
         $response->assertStatus(200);
         

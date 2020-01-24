@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace BusinessCardSite\Services;
 
 /** 
  * Абстрактный класс сервиса
@@ -11,7 +11,7 @@ abstract class BaseService
     * Экземпляр репозитория
     * @var BaseRepository
     */
-    public $repo;
+    protected $repo;
 
     /**
     * Возвращает все элементы модели
@@ -33,6 +33,7 @@ abstract class BaseService
     
    /**
     * Создает элемент модели
+    * @param array $input
     * @return BusinessCardSite\Model
     */  
     public function create(array $input)
@@ -42,6 +43,7 @@ abstract class BaseService
     
     /**
     * Находит элемент модели
+    * @param int $id
     * @return BusinessCardSite\Model
     */  
     public function find($id)
@@ -51,6 +53,8 @@ abstract class BaseService
 
     /**
     * Обновляет элемент модели
+    * @param int $id
+    * @param array $input
     * @return BusinessCardSite\Model
     */ 
     public function update($id, array $input)
@@ -60,6 +64,7 @@ abstract class BaseService
     
     /**
     * Удаляет элемент модели
+    * @param int $id
     * @return BusinessCardSite\Model
     */ 
     public function destroy($id)

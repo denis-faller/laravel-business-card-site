@@ -4,7 +4,7 @@ namespace BusinessCardSite\Http\Controllers\Auth;
 
 use BusinessCardSite\Http\Controllers\Controller;
 use BusinessCardSite\Providers\RouteServiceProvider;
-use BusinessCardSite\Model\User;
+use BusinessCardSite\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;

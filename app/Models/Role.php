@@ -1,9 +1,9 @@
 <?php
 
-namespace BusinessCardSite\Model;
+namespace BusinessCardSite\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use BusinessCardSite\Model\User;
+use BusinessCardSite\Models\User;
 
 class Role extends Model
 {

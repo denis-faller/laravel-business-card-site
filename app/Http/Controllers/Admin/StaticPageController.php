@@ -2,9 +2,9 @@
 
 namespace BusinessCardSite\Http\Controllers\Admin;
 
-use BusinessCardSite\Model\User;
 use BusinessCardSite\Model\StaticPage;
 use BusinessCardSite\Model\Site;
+use BusinessCardSite\Services\StaticPageService;
 use BusinessCardSite\Http\Requests\StaticPageRequest;
 use BusinessCardSite\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -58,7 +58,7 @@ class StaticPageController extends Controller
     * Возвращает представление страницы редактирования статической страницы
     * @return Illuminate\Support\Facades\View
     */  
-    public function edit(StaticPage $page)
+    public function edit($page)
     {
         view()->share(['title' => 'Редактирование статической страницы', 'description' => 'Редактирование статической страницы сайта']);
         return view('admin.staticPage.edit', ['page' => $page]);
