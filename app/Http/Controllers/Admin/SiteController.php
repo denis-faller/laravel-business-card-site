@@ -2,12 +2,10 @@
 
 namespace BusinessCardSite\Http\Controllers\Admin;
 
-use BusinessCardSite\Model\User;
-use BusinessCardSite\Model\Site;
-use BusinessCardSite\Model\StaticPage;
+use BusinessCardSite\Services\SiteService;
 use BusinessCardSite\Http\Requests\SiteRequest;
+use BusinessCardSite\Models\Site;
 use BusinessCardSite\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 
 /** 
  * Контроллер для работы с информацией сайта
@@ -17,23 +15,29 @@ class SiteController extends Controller
 {
     /**
     * Возвращает представление страницы отображения информации о сайте
+    * @param SiteService $service
     * @return Illuminate\Support\Facades\View
     */  
     
-    public function index()
+    public function index(SiteService $service)
     {
-        $site = Site::find(Site::MAIN_SITE_ID);
+        $site = $service->find(Site::MAIN_SITE_ID);
+        
         view()->share(['title' => 'Страница настроек сайта', 'description' => ' Страница информации о сайте']);
         return view('admin.site.index', ['site' => $site]);
     }
     
     /**
     * Возвращает представление страницы редактирования информации о сайте
+    * @param int $id
+    * @param SiteService $service
     * @return Illuminate\Support\Facades\View
     */  
     
-    public function edit(Site $site)
+    public function edit($id, SiteService $service)
     {
+        $site = $service->find($id);
+        
         view()->share(['title' => 'Страница редактирования сайта', 'description' => ' Страница редактирования информации о сайте']);
         return view('admin.site.edit', ['site' => $site]);
     }
@@ -41,13 +45,13 @@ class SiteController extends Controller
     /**
     * Обновляет информацию о сайте
     * @param Illuminate\Http\SiteRequest $request
-    * @param BusinessCardSite\Model\Site $site
+    * @param int $id
+    * @param SiteService $service
     * @return Illuminate\Routing\Redirector
     */  
-    public function update(SiteRequest $request, Site $site)
+    public function update(SiteRequest $request, $id, SiteService $service)
     {   
-        $site->name = $request->name;
-        $site->save();
+        $service->update($id, array('name' => $request->name));
         
         return redirect(route('admin.Site.index'));
     }

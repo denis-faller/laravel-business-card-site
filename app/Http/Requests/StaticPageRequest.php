@@ -19,8 +19,8 @@ class StaticPageRequest extends FormRequest
         if($this->url() == route('admin.StaticPage.store')){
             $urlRule = "required|unique:static_pages|max:255";
         }
-        elseif($this->url() == route('admin.StaticPage.update', $this->page->id)){
-            $urlRule = "required|unique:static_pages,url,{$this->page->id}|max:255";
+        elseif($this->url() == route('admin.StaticPage.update', $this->id)){
+            $urlRule = "required|unique:static_pages,url,{$this->id}|max:255";
         }
         
         return [

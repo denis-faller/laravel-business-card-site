@@ -20,9 +20,9 @@ Route::resource('/', 'StaticPageController', ['only' => [
 
 Route::prefix('/admin')->middleware(['auth', 'isAdmin'])->group(function() {
     
-    Route::get('/pages/{page}/edit', 'Admin\StaticPageController@edit')->name('admin.StaticPage.edit');
-    Route::patch('/pages/{page}', 'Admin\StaticPageController@update')->name('admin.StaticPage.update');
-    Route::delete('/pages/{page}', 'Admin\StaticPageController@destroy')->name('admin.StaticPage.destroy');
+    Route::get('/pages/{id}/edit', 'Admin\StaticPageController@edit')->name('admin.StaticPage.edit');
+    Route::patch('/pages/{id}', 'Admin\StaticPageController@update')->name('admin.StaticPage.update');
+    Route::delete('/pages/{id}', 'Admin\StaticPageController@destroy')->name('admin.StaticPage.destroy');
     Route::resource('/pages/', 'Admin\StaticPageController', ['only' => [
         'index', 'create', 'store'
     ],
@@ -32,8 +32,8 @@ Route::prefix('/admin')->middleware(['auth', 'isAdmin'])->group(function() {
         'store' => 'admin.StaticPage.store'
     ]]);
 
-    Route::get('/sites/{site}/edit/', 'Admin\SiteController@edit')->name('admin.Site.edit');
-    Route::patch('/sites/{site}', 'Admin\SiteController@update')->name('admin.Site.update');
+    Route::get('/sites/{id}/edit/', 'Admin\SiteController@edit')->name('admin.Site.edit');
+    Route::patch('/sites/{id}', 'Admin\SiteController@update')->name('admin.Site.update');
     Route::resource('/sites/', 'Admin\SiteController', ['only' => [
         'index'
     ],

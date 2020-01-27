@@ -2,12 +2,11 @@
 
 namespace BusinessCardSite\Http\Controllers\Admin;
 
-use BusinessCardSite\Model\StaticPage;
-use BusinessCardSite\Model\Site;
 use BusinessCardSite\Services\StaticPageService;
 use BusinessCardSite\Http\Requests\StaticPageRequest;
+use BusinessCardSite\Models\StaticPage;
+use BusinessCardSite\Models\Site;
 use BusinessCardSite\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 
 /** 
  * Контроллер для работы со статической страницы
@@ -17,11 +16,13 @@ class StaticPageController extends Controller
 {
     /**
     * Возвращает представление страницы отображения статических страниц
+    * @param StaticPageService $service
     * @return Illuminate\Support\Facades\View
     */  
-    public function index()
+    public function index(StaticPageService $service)
     {
-        $pages = StaticPage::all();
+        $pages = $service->all();
+        
         view()->share(['title' => 'Админка', 'description' => 'Админка сайта']);
         return view('admin.index', ['pages' => $pages, 'mainPageId' => StaticPage::MAIN_PAGE_ID]);
     }
@@ -39,27 +40,30 @@ class StaticPageController extends Controller
     /**
     * Создает статическую страницу
     * @param Illuminate\Http\StaticPageRequest $request
+    * @param StaticPageService $service
     * @return Illuminate\Routing\Redirector
     */  
-    public function store(StaticPageRequest $request)
+    public function store(StaticPageRequest $request, StaticPageService $service)
     {   
-        $page = new StaticPage();
-        $page->site_id = Site::MAIN_SITE_ID;
-        $page->name = $request->name;
-        $page->description = $request->description;
-        $page->url = $request->url;
-        $page->html = $request->html;
-        $page->save();
+        $service->create(array('site_id' => Site::MAIN_SITE_ID, 
+            'name' => $request->name, 
+            'description' => $request->description, 
+            'url' => $request->url, 
+            'html' => $request->html));
         
         return redirect(route('admin.StaticPage.index'));
     }
     
     /**
     * Возвращает представление страницы редактирования статической страницы
+    * @param int $id
+    * @param StaticPageService $service
     * @return Illuminate\Support\Facades\View
     */  
-    public function edit($page)
+    public function edit($id, StaticPageService $service)
     {
+        $page = $service->find($id);
+        
         view()->share(['title' => 'Редактирование статической страницы', 'description' => 'Редактирование статической страницы сайта']);
         return view('admin.staticPage.edit', ['page' => $page]);
     }
@@ -67,29 +71,30 @@ class StaticPageController extends Controller
     /**
     * Обновляет статическую страницу
     * @param Illuminate\Http\StaticPageRequest $request
-    * @param BusinessCardSite\Model\StaticPage $page
+    * @param int $id
+    * @param StaticPageService $service
     * @return Illuminate\Routing\Redirector
     */  
-    public function update(StaticPageRequest $request, StaticPage $page)
+    public function update(StaticPageRequest $request, $id, StaticPageService $service)
     {   
-        $page->site_id = Site::MAIN_SITE_ID;
-        $page->name = $request->name;
-        $page->description = $request->description;
-        $page->url = $request->url;
-        $page->html = $request->html;
-        $page->save();
+        $service->update($id, array('site_id' => Site::MAIN_SITE_ID, 
+            'name' => $request->name, 
+            'description' => $request->description, 
+            'url' => $request->url, 
+            'html' => $request->html));
         
         return redirect(route('admin.StaticPage.index'));
     }
     
     /**
     * Удаляет статическую страницу
-    * @param BusinessCardSite\Model\StaticPage $page
+    * @param int $id
+    * @param StaticPageService $service
     * @return Illuminate\Http\Response
     */  
-    public function destroy(StaticPage $page)
+    public function destroy($id, StaticPageService $service)
     {   
-        $page->delete();
+        $service->destroy($id);
 
         return response('OK', 200);
     }

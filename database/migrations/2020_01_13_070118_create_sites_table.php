@@ -19,7 +19,7 @@ class CreateSitesTable extends Migration
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
         });
-       $date = Carbon\Carbon::now();
+        $date = Carbon\Carbon::now();
         DB::table('sites')->insert(
             ['name' => 'Сайт компании','created_at' => $date, 'updated_at' => $date]
         );

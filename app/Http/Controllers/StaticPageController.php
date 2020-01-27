@@ -14,17 +14,20 @@ class StaticPageController extends Controller
     
     /**
     * Возвращает представление главной страницы
+    * @param StaticPageService $service
     * @return Illuminate\Support\Facades\View
     */  
     public function index(StaticPageService $service)
     {        
         $mainPage = $service->find(StaticPage::MAIN_PAGE_ID);
+        
         return view('index', ['content' => $mainPage]);
     }
 
     /**
     * Возвращает представление статической страницы
     * @param string $url
+    * @param StaticPageService $service
     * @return Illuminate\Support\Facades\View
     */  
     

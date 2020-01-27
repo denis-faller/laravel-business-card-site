@@ -4,6 +4,7 @@ namespace BusinessCardSite\Services;
 
 use BusinessCardSite\Repositories\StaticPageRepository;
 
+
 /** 
  * Класс сервиса сайта
  */
@@ -16,6 +17,9 @@ class StaticPageService extends BaseService
    public function __construct(StaticPageRepository $pageRepository)
    {
        $this->repo = $pageRepository;
+       
+       $this->repo->setSortBy('updated_at');
+       $this->repo->setSortOrder('desc');
    }
    
     /**

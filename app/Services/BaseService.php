@@ -26,9 +26,9 @@ abstract class BaseService
     * Возвращает элементы модели постранично
     * @return BusinessCardSite\Model
     */  
-    public function paginated()
+    public function paginated($paginate)
     {
-        return $this->repo->paginated(config('paginate'));
+        return $this->repo->paginated($paginate);
     }
     
    /**

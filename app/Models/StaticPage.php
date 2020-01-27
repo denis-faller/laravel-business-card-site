@@ -8,4 +8,6 @@ class StaticPage extends Model
 {
     // id главной страницы
     const MAIN_PAGE_ID = 1;
+    
+    protected $fillable = array('site_id', 'name', 'description', 'url', 'html');
 }

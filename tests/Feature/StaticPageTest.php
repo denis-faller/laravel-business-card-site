@@ -2,12 +2,11 @@
 
 namespace Tests\Feature;
 
-use BusinessCardSite\Model\User;
-use BusinessCardSite\Model\StaticPage;
+use BusinessCardSite\Services\StaticPageService;
+use BusinessCardSite\Models\User;
+use BusinessCardSite\Models\StaticPage;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
-use DB;
 
 class StaticPageTest extends TestCase
 {

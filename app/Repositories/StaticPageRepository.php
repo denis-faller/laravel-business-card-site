@@ -3,12 +3,14 @@
 namespace BusinessCardSite\Repositories;
 
 use BusinessCardSite\Models\StaticPage;
+use BusinessCardSite\Repositories\Traits\Sortable;
 
 /** 
  * Класс репозитория статических страниц
  */
 class StaticPageRepository extends BaseRepository
 {
+    use Sortable;
     /**
     * Экземпляр модели статическиой страницы
     * @var StaticPage

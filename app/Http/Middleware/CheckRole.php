@@ -3,7 +3,7 @@
 namespace BusinessCardSite\Http\Middleware;
 
 use Closure;
-use BusinessCardSite\Model\Role;
+use BusinessCardSite\Models\Role;
 use Illuminate\Support\Facades\Auth;
 
 /** 
