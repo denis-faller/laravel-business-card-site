@@ -63,7 +63,7 @@
         </nav>
         @yield('content')
     </div>
-    <script src="/assets/jquery-3.4.1.slim.min.js" ></script>
+    <script src="/assets/jquery-3.4.1.min.js" ></script>
     <script src="/assets/popper.min.js"></script>
     <script src="/assets/bootstrap-4.4.1-dist/js/bootstrap.min.js"></script>
   </body>

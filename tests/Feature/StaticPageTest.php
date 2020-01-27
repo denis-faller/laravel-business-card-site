@@ -5,8 +5,10 @@ namespace Tests\Feature;
 use BusinessCardSite\Services\StaticPageService;
 use BusinessCardSite\Models\User;
 use BusinessCardSite\Models\StaticPage;
+use BusinessCardSite\Models\Site;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Tests\TestCase;
 
 class StaticPageTest extends TestCase
 {
@@ -50,8 +52,12 @@ class StaticPageTest extends TestCase
         $response->assertLocation(route("admin.StaticPage.index"));
         
         $this->assertDatabaseHas('static_pages', ['url' => $url]);
-
-        DB::table('static_pages')->where('url', '=', $url)->delete();
+        
+        $service = app(StaticPageService::class);
+        
+        $page = $service->findByUrl($url);
+        
+        $service->destroy($page->id);
     }
     
     /**
@@ -60,9 +66,15 @@ class StaticPageTest extends TestCase
      */
     public function testUpdate()
     {
-        $id = DB::table('static_pages')->insertGetId(
-            ['site_id' => 1, 'name' => 'История компании', 'description' => 'История компании', 'url' => 'history', 'html' => '<p>История компании</p>']
-        );
+        $service = app(StaticPageService::class);
+        
+        $page = $service->create(['site_id' => Site::MAIN_SITE_ID, 
+            'name' => 'История компании', 
+            'description' => 'История компании', 
+            'url' => 'history', 
+            'html' => '<p>История компании</p>']);
+        
+        $id = $page->id;
         
         $user = User::find(User::ID_ADMIN);
 
@@ -80,7 +92,7 @@ class StaticPageTest extends TestCase
         
         $this->assertDatabaseHas('static_pages', ['id' => $id]);
         
-        DB::table('static_pages')->where('id', '=', $id)->delete();
+        $service->destroy($id);
     }
     
     /**
@@ -89,9 +101,15 @@ class StaticPageTest extends TestCase
      */
     public function testDelete()
     {
-        $id = DB::table('static_pages')->insertGetId(
-            ['site_id' => 1, 'name' => 'История компании', 'description' => 'История компании', 'url' => 'history', 'html' => '<p>История компании</p>']
-        );
+        $service = app(StaticPageService::class);
+        
+        $page = $service->create(['site_id' => Site::MAIN_SITE_ID, 
+            'name' => 'История компании', 
+            'description' => 'История компании', 
+            'url' => 'history', 
+            'html' => '<p>История компании</p>']);
+        
+        $id = $page->id;
         
         $user = User::find(User::ID_ADMIN);
 

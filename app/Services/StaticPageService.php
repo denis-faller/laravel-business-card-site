@@ -18,8 +18,8 @@ class StaticPageService extends BaseService
    {
        $this->repo = $pageRepository;
        
-       $this->repo->setSortBy('updated_at');
-       $this->repo->setSortOrder('desc');
+       $this->repo->setSortBy('id');
+       $this->repo->setSortOrder('asc');
    }
    
     /**

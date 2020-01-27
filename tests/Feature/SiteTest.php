@@ -2,8 +2,9 @@
 
 namespace Tests\Feature;
 
-use BusinessCardSite\Model\User;
-use BusinessCardSite\Model\Site;
+use BusinessCardSite\Services\SiteService;
+use BusinessCardSite\Models\User;
+use BusinessCardSite\Models\Site;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -34,7 +35,9 @@ class SiteTest extends TestCase
     {
         $id = Site::MAIN_SITE_ID;
         
-        $site = Site::find(Site::MAIN_SITE_ID);
+        $service = app(SiteService::class);
+        
+        $site = $service->find($id);
         
         $user = User::find(User::ID_ADMIN);
 

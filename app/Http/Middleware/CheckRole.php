@@ -3,7 +3,7 @@
 namespace BusinessCardSite\Http\Middleware;
 
 use Closure;
-use BusinessCardSite\Models\Role;
+use BusinessCardSite\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Auth;
 
 /** 
@@ -21,7 +21,7 @@ class CheckRole
     public function handle($request, Closure $next)
     {
         $userID = Auth::id();
-        if(Role::isAdmin($userID)){
+        if(RoleController::isAdmin($userID)){
             return $next($request);
         }
         return redirect(route('login'));
